@@ -11,13 +11,15 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@master
       - name: 步骤：第一步 Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
         env:
           ACCESS_TOKEN_1: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
+          ACCESS_TOKEN_2: ${{secrets}}
+          ACCESS_TOKEN_3: ${{secrets}}
       # - name: 步骤：第二步（npm install, build）
       #   uses: JamesIves/github-pages-deploy-action@master
       #   run: npm install && npm run build
