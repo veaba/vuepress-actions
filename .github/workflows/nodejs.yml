@@ -23,7 +23,7 @@ jobs:
         env:
           ACCESS_TOKEN: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
           CI: true
-      - name: print
+      - name: deplpy:deploy/build.sh
         env:
           ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
         run: |
