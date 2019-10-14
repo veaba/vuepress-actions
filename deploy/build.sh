@@ -1,10 +1,13 @@
 cd docs/.vuepress/dist
 git init
-git add .
-git commit -m "[Deploy sucess]：`date`"
+
 # 配置git
 git config --global user.name "veaba"
 git config --global user.email "908662421@qq.com"
+
+# git提交
+git add .
+git commit -m "[Deploy sucess]：`date`"
 
 # 设置remote
 git remote add origin "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git"
