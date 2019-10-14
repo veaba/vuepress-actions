@@ -27,10 +27,10 @@ jobs:
           echo $ACCESS_TOKEN_PUSH
           cd docs/
           git init
-          git add . 
-          git commit -m "[Deploy Successful!]"
           git config --global user.email "xx@qq.com"
           git config --global user.name "veaba"
+          git add . 
+          git commit -m "[Deploy Successful!]"
           git remote -v
           git branch -v
           git push -f https://veaba:${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI}}@github.com/veaba/vuepress.git master:gh-pages
