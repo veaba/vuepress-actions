@@ -26,5 +26,6 @@ jobs:
       - name: print
         run: |
           pwd
-           ls 
-           git branch -v
+          ls 
+          cd docs/.vuepress
+          ls 
