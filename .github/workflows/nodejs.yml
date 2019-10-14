@@ -11,15 +11,15 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: Checkout
       - name: 步骤：第一步 Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/checkout@master
         with:
           node-version: ${{ matrix.node-version }}
       - name: 步骤：第二步（npm install, build）
         uses: JamesIves/github-pages-deploy-action@master
         env:
-          ACCESS_TOKEN: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
+          ACCESS_TOKEN: ${{ secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
           BUILD_SCRIPT: npm install && npm run build
