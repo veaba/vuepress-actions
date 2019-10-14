@@ -2,6 +2,7 @@ pwd
 ls
 cd docs/.vuepress/dist
 ls
+git init
 git add .
 git checkout -b gh-pages
 
