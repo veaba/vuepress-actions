@@ -7,7 +7,7 @@ git config --global user.name "veaba"
 git config --global user.email "908662421@qq.com"
 
 # 设置remote
-git remote add origin "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git" master
+git remote add origin "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git"
 
 # 查看此时的分支
 git branch -v
