@@ -5,10 +5,6 @@ git init
 git config user.name ${GITHUB_ACTOR}
 git config user.email "908662421@qq.com"
 
-export 
-
-echo $ACCESS_TOKEN_PUSH
-echo $GITHUB_ACTOR
 
 # git提交
 git add .
@@ -22,7 +18,7 @@ set -e
 # 用echo 拼装，否则会无效！！测试了上百次的结果,access token 会被过滤
 # echo "`git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages`"
 
-git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages
+echo `git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages`
 
 # echo "git push -f origin master:gh-pages"
 # echo "git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages"
