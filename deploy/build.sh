@@ -1,4 +1,4 @@
-cd docs/.vuepress/dist
+cd docs/
 git init
 
 # 配置git
@@ -13,7 +13,7 @@ git commit -m "[Deploy sucess]：`date`"
 set -e 
 
 # 用echo 拼装，否则会无效！！测试了上百次的结果
-echo "`git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages`"
+echo "`git push -f https://github.com/veaba/vuepress.git master:gh-pages`"
 # git push -f "https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git" master:gh-pages
 
 echo "漂亮！部署成功： `date`"
