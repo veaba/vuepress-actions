@@ -8,18 +8,15 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
+    - name: checkout 
+      uses: actions/checkout@master
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
       env:
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: .vuepress/dist
+        BUILD_SCRIPT: npm install && npm run build
         CI: true
