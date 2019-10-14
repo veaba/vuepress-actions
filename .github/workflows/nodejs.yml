@@ -24,5 +24,7 @@ jobs:
           ACCESS_TOKEN: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
           CI: true
       - name: print
+        env:
+          ACCESS_TOKEN_1: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
         run: |
           sh deploy/build.sh
