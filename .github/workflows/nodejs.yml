@@ -24,4 +24,6 @@ jobs:
         env:
           ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
         run: |
-          sh deploy/build.sh
+          git remote -v
+          git branch -v
+          echo $ACCESS_TOKEN_PUSH
