@@ -1,4 +1,4 @@
-name: Node CI
+name: Vuepress CI
 
 on: [push]
 
@@ -16,14 +16,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build
+      - name: 第二步：第二步（npm install, build）
         run: |
           npm install
           npm run build --if-present
         env:
           ACCESS_TOKEN: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
           CI: true
-      - name: deplpy:deploy/build.sh
+      - name: 步骤：第三步（deplpy：deploy/build.sh）
         env:
           ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
         run: |

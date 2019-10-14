@@ -3,8 +3,8 @@ git init
 git add .
 
 # 配置git
-git config --gloabl user.name "veaba"
-git config --gloabel user.email "908662421@qq.com"
+git config --global user.name "veaba"
+git config --global user.email "908662421@qq.com"
 
 # 抛出错误
 set -e 
