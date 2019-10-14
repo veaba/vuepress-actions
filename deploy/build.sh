@@ -12,14 +12,12 @@ git commit -m "[Deploy sucess]：`date`"
 # 抛出错误
 set -e 
 
-# 用echo 拼装，否则会无效！！测试了上百次的结果
+# 用echo 拼装，否则会无效！！测试了上百次的结果,access token 会被过滤
 # echo "`git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages`"
 # git push -f "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git" master:gh-pages
 
 echo ${ACCESS_TOKEN_PUSH}
 
 echo "git push -f https://veava:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages"
-
-echo `"https://veaba:"${ACCESS_TOKEN_PUSH}"@github.com/veaba/vuepress.git master:gh-pages"`
 
 echo "漂亮！部署成功： `date`"
