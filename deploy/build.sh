@@ -7,6 +7,9 @@ git config user.email "908662421@qq.com"
 
 export 
 
+echo $ACCESS_TOKEN_PUSH
+echo $GITHUB_ACTOR
+
 # git提交
 git add .
 git commit -m "[Deploy sucess]：`date`"
