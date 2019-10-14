@@ -19,7 +19,7 @@ jobs:
       - name: 步骤：第二步（npm install, build）
         uses: JamesIves/github-pages-deploy-action@master
         env:
-          ACCESS_TOKEN: ${{ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
+          ACCESS_TOKEN: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
           BUILD_SCRIPT: npm install && npm run build
