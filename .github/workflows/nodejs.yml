@@ -1,22 +1,18 @@
-name: Node CI
-
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-    - name: checkout 
+    steps:
+    - name: Checkout
       uses: actions/checkout@master
 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@master
       env:
-      env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: .vuepress/dist
+        FOLDER: docs/.vuepress/dist
         BUILD_SCRIPT: npm install && npm run build
-        CI: true
