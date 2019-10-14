@@ -17,8 +17,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: 步骤：第二步（npm install, build）
-        # run: |
-        #   npm install
+        run: |
+          export
         #   npm run build --if-present
         env:
           ACCESS_TOKEN_1: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
