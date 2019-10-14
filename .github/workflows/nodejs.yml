@@ -16,15 +16,12 @@ jobs:
         uses: actions/checkout@master
         with:
           node-version: ${{ matrix.node-version }}
-      - name: 步骤：第二步（npm install, build）
-        uses: JamesIves/github-pages-deploy-action@master
+
+      # - name: 步骤：第二步（npm install, build）
+      #   uses: JamesIves/github-pages-deploy-action@master
+      #   run: npm install && npm run build
+
+      - name: 步骤：第三步（deplpy：deploy/build.sh）
         env:
-          ACCESS_TOKEN: ${{ secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
-          BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist
-          BUILD_SCRIPT: npm install && npm run build
-      # - name: 步骤：第三步（deplpy：deploy/build.sh）
-      #   env:
-      #     ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
-      #   run: |
-      #     sh deploy/build.sh
+          ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
+        run: sh deploy/build.sh
