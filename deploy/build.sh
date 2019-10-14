@@ -9,6 +9,8 @@ git config user.email "908662421@qq.com"
 git add .
 git commit -m "[Deploy sucess]：`date`"
 
+git remote add origin https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git
+
 # 抛出错误
 set -e 
 
@@ -16,8 +18,8 @@ set -e
 # echo "`git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages`"
 # git push -f "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git" master:gh-pages
 
-echo ${ACCESS_TOKEN_PUSH}
 
-echo "git push -f https://veava:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages"
+echo "git push -f origin master:gh-pages"
+# echo "git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages"
 
 echo "漂亮！部署成功： `date`"
