@@ -21,4 +21,5 @@
 # git push -f "https://oauth2:${secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI}@github.com:veaba/vuepress.git master:gh-pages"
 echo ${ACCESS_TOKEN}
 echo ${ACCESS_TOKEN_1}
+export
 echo "漂亮！部署成功： `date`"
