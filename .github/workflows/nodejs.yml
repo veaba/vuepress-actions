@@ -27,11 +27,10 @@ jobs:
           echo $ACCESS_TOKEN_PUSH
           cd docs/
           git init
-          git config user.name ${GITHUB_ACTOR}
-          git config user.name "908662421@qq.com"
           git add . 
           git commit -m "[Deploy Successful!]"
           git remote -v
           git branch -v
           #git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages
+          git push -f origin master:gh-pages
           echo "漂亮~~"
