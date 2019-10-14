@@ -16,7 +16,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
+        env:
+          ACCESS_TOKEN_1: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI}}
       # - name: 步骤：第二步（npm install, build）
       #   uses: JamesIves/github-pages-deploy-action@master
       #   run: npm install && npm run build

@@ -2,8 +2,8 @@ cd docs/
 git init
 
 # 配置git
-git config user.name ${COMMIT_EMAIL}
-git config user.email ${COMMIT_NAME}
+git config user.name ${GITHUB_ACTOR}
+git config user.email "908662421@qq.com"
 
 export 
 
