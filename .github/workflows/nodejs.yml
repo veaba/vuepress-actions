@@ -33,5 +33,7 @@ jobs:
           git commit -m "[Deploy Successful!]"
           git remote -v
           git branch -v
-          git push -f https://veaba:${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI}}@github.com/veaba/vuepress.git master:gh-pages
+          git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git master:gh-pages
+          echo $ACCESS_TOKEN_PUSH
+          echo ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
           echo "漂亮~~"
