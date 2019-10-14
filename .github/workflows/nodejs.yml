@@ -1,3 +1,4 @@
+name: Vuepress CI
 on:
   push:
     branches:

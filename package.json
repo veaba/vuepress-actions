@@ -1,5 +1,5 @@
-{
-    "homepage": "https://github.com/veaba/vuepress",
+{   "name": "vuepress",
+    "homepage": "https://veaba.github.io/vuepress",
     "scripts": {
       "dev": "vuepress dev docs",
       "build": "vuepress build docs"
