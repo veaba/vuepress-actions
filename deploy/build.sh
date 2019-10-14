@@ -7,6 +7,10 @@ git checkout -b gh-pages
 
 #  把dist 发布到新分支
 
+# 配置git
+git config user.name veaba
+git config user.email 908662421@qq.com
+
 # 抛出错误
 set -e 
 git add .
