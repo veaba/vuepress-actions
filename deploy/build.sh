@@ -26,5 +26,5 @@ set -e
 # git push -f origin master:gh-pages
 # git push -f "git@github.com/veaba"
 
-git push --set-upstream "https://${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress.git" master:gh-pages
+git push --set-upstream "https://github.com/veaba/vuepress.git" master:gh-pages
 echo "漂亮！部署成功： `date`"
