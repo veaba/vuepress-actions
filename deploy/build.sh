@@ -16,6 +16,8 @@ git config user.email 908662421@qq.com
 set -e 
 git add .
 git commit -m "[Deploy sucess]：`date`"
+# git remote add origin git@github.com:veaba/vuepress.git
 git push -f git@github.com:veaba/vuepress.git master:gh-pages
+# git push -f https://oauth2:${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI}}@github.com:veaba/vuepress.git master:gh-pages
 
 echo "漂亮！部署成功： `date`"
