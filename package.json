@@ -1,4 +1,5 @@
 {
+    "homepage": "https://[username].github.io/vuepress",
     "scripts": {
       "dev": "vuepress dev docs",
       "build": "vuepress build docs"
@@ -11,4 +12,4 @@
         "sass-loader": "^7.1.0",
         "vuepress": "^1.1.0"
       }
-  }
+}
