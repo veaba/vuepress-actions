@@ -16,22 +16,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # - name: 步骤：第二步（npm install, build）
-      #   run: |
-      #     export
-      #   npm run build --if-present
-      - name: 步骤：第三步（deplpy：deploy/build.sh）
-        env:
-          ACCESS_TOKEN_PUSH: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
         run: |
-          echo $ACCESS_TOKEN_PUSH
-          cd docs/
-          git init
-          git config --global user.email "xx@qq.com"
-          git config --global user.name "veaba"
-          git add . 
-          git commit -m "[Deploy Successful!]"
-          git remote -v
-          git branch -v
-          git push -f https://github.com/veaba/vuepress.git master:gh-pages
-          echo "漂亮~~"
+          npm install
+          npm run build --if-present
+      # - name: 步骤：第三步（deplpy：deploy/build.sh）
+      #   env:
+      #     ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
+      #   run: |
+      #     sh deploy/build.sh
+      - name: 步骤：第二步：Deploy,部署
+        uses: peaceiris/actions-gh-pages@v2.5.0
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./docs/.vuepress/dist
