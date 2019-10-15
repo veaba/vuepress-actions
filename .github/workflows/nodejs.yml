@@ -21,7 +21,7 @@ jobs:
           npm install
           npm run build --if-present
         env:
-        CI: true
+          CI: true
       # - name: 步骤：第三步（deplpy：deploy/build.sh）
       #   env:
       #     ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
