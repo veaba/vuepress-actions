@@ -7,7 +7,9 @@ cd ./docs
 echo $(pwd)
 echo $(ls)
 
-cd ./vuepress
+find / -name .vuepress
+
+# ！！！为什么这里没有呢？
 echo $(pwd)
 echo $(ls)
 
