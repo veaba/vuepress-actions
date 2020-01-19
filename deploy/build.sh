@@ -37,17 +37,12 @@ fi
 # 配置ssh
 if [ -n "${DEPLOY_ACCESS_TOKEN}"]; then
     echo "设置 DEPLOY_ACCESS_TOKEN"
-    if [ -n "${SCRIPT_MODE}"]; then
-        echo "模式：SCRIPT MODE"
-        SSH_DIR="${HOME}/.ssh"
-    else
-        SSH_DIR="/root/.ssh"
-    fi
+    SSH_DIR="${HOME}.ssh"
+    # SSH_DIR = "/root/.ssh"
     mkdir "${SSH_DIR}"
     ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
     echo "${DEPLOY_ACCESS_TOKEN}" >"${SSH_DIR}/id_rsa"
     chmod 400 "${SSH_DIR}/id_rsa"
-
     remote_repo="git@github.com:${PUBLISH_REPOSITORY}.git"
 fi
 # 检查要发布的脚本
