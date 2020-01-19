@@ -33,7 +33,7 @@ if [ -n "${DEPLOY_ACCESS_TOKEN}"]; then
     echo "设置 DEPLOY_ACCESS_TOKEN"
     if [ -n "${SCRIPT_MODE}"]; then
         echo "模式：SCRIPT MODE"
-        SSH_DIR="{HOME}/.ssh"
+        SSH_DIR="${HOME}/.ssh"
     else
         SSH_DIR="/root/.ssh"
     fi
