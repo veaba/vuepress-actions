@@ -2,24 +2,28 @@
 echo $(pwd)
 echo $(ls)
 
-# cd "${PUBLISH_DIR}"
-
-# 检查Actions目录配置
-if [ -z "${PUBLISH_DIR}" ]; then
-    echo "错误：workflows尚未设置 PUBLISH_DIR"
-    exit 1
-fi
-
-# 检查设置的目录是否存在，不存在直接退出
-if [ -d "${PUBLISH_DIR}" ]; then
-    echo "错误：PUBLISH_DIR 尚未生成"
-    exit 1
-fi
-
-cd "${PUBLISH_DIR}"
+cd ./docs 
 
 echo $(pwd)
 echo $(ls)
+
+
+# 检查Actions目录配置
+# if [ -z "${PUBLISH_DIR}" ]; then
+#     echo "错误：workflows尚未设置 PUBLISH_DIR"
+#     exit 1
+# fi
+
+# # 检查设置的目录是否存在，不存在直接退出
+# if [ -d "${PUBLISH_DIR}" ]; then
+#     echo "错误：PUBLISH_DIR 尚未生成"
+#     exit 1
+# fi
+
+# cd "${PUBLISH_DIR}"
+
+# echo $(pwd)
+# echo $(ls)
 
 # function print_error() {
 #     echo -e "\e[31mERROR: ${1}\e[m"
