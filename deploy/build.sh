@@ -1,5 +1,5 @@
 # !/bin/bash
-
+set -e
 # 检查Actions目录配置
 if [ -z "${PUBLISH_DIR}" ]; then
     echo "【致命错误】：workflows尚未设置 PUBLISH_DIR"
@@ -13,14 +13,13 @@ if [ -d "$(pwd)${PUBLISH_DIR}" ]; then
 fi
 
 # 检查要发布的分支名称
-if [ -z "${PUBLISH_BRANCH}"]; then
+if [ -z "${PUBLISH_BRANCH}" ]; then
     print_error "【致命错误】：没有发现 PUBLISH_BRANCH"
     exit 1
 fi
 
-
 # 进入到build的目录
-cd "${PUBLISH_DIR}"
+cd "${PUBLISH_DIR}" # ./docs/.vuepress/dist
 
 # 为gh-pages 生成CNAME，发现使用别人提供的脚本，生成的竟然是小写的CNAME文件，所以改为小写的，使用脚本写入
 
@@ -41,14 +40,15 @@ if [ -n "${EXTERNAL_REPOSITORY}" ]; then
 else
     PUBLISH_REPOSITORY=${GITHUB_REPOSITORY}
 fi
+
 # 配置ssh
-if [ -n "${DEPLOY_ACCESS_TOKEN}"]; then
-    echo "设置 DEPLOY_ACCESS_TOKEN"
+if [ -n "${ACCESS_TOKEN_DEPLOY}"]; then
+    echo "设置 ACCESS_TOKEN_DEPLOY"
     # SSH_DIR="${HOME}.ssh"
     SSH_DIR="/root/.ssh"
     mkdir "${SSH_DIR}"
-    ssh-keyscan -t rsa github.com > "${SSH_DIR}/known_hosts"
-    echo "${DEPLOY_ACCESS_TOKEN}" > "${SSH_DIR}/id_rsa"
+    ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
+    echo "${ACCESS_TOKEN_DEPLOY}" >"${SSH_DIR}/id_rsa"
     chmod 400 "${SSH_DIR}/id_rsa"
     remote_repo="git@github.com:${PUBLISH_REPOSITORY}.git"
 fi
@@ -66,8 +66,6 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote rm origin || true
 git remote add origin "${remote_repo}"
 
-
-
 # git提交
 git add .
 git commit -m "[Deploy sucess]：$(date)"
@@ -76,8 +74,6 @@ git commit -m "[Deploy sucess]：$(date)"
 echo "查看分支：$(git branch -v)"
 echo "查看remote：$(git remote -v)"
 
-# 抛出错误
-set -e
 git push origin -f "${PUBLISH_BRANCH}"
 
 print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"
