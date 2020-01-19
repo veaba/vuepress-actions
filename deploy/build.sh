@@ -19,9 +19,15 @@ cd "${PUBLISH_DIR}"
 
 echo "vue.datav.ai" >CNAME
 
+# 格式化的输出
 function print_error() {
     echo -e "\e[31mERROR: ${1}\e[m"
 }
+
+function print_info() {
+    echo -e "\e[36mINFO: ${1}\e[m"
+}
+
 # 配置仓库地址
 if [ -n "${EXTERNAL_REPOSITORY}" ]; then
     PUBLISH_REPOSITORY=${EXTERNAL_REPOSITORY}
@@ -56,14 +62,15 @@ remote_branch="${PUBLISH_BRANCH}"
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote rm origin || true
+git remote add origin "${remote_repo}"
 
 # git提交
-git add .
+git add -all
 git commit -m "[Deploy sucess]：$(date)"
 
 # 抛出错误
 set -e
 
-echo $(git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress-actions.git ${PUBLISH_BRANCH})
+git push origin "${PUBLISH_BRANCH}"
 
-echo "漂亮！部署成功： $(date)"
+print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"
