@@ -30,5 +30,7 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
         run: |
+          npm install
+          npm run build
           chmod +x  deploy/build.sh
           bash deploy/build.sh
