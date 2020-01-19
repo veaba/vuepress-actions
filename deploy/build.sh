@@ -69,10 +69,13 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote rm origin || true
 git remote add origin "${remote_repo}"
 
+# 更改时间
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 # git提交
 git add .
 push_time="$(date '+%Y-%m-%d %H:%M:%S')"
-git commit -m "【Deploy Sucessfull!】：${push_time}"
+git commit -m "【Deployment success】：${push_time}"
 
 git push origin -f "${PUBLISH_BRANCH}"
 
