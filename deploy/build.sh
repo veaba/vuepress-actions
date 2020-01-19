@@ -2,15 +2,22 @@
 
 # 检查Actions目录配置
 if [ -z "${PUBLISH_DIR}" ]; then
-    echo "错误：workflows尚未设置 PUBLISH_DIR"
+    echo "【致命错误】：workflows尚未设置 PUBLISH_DIR"
     exit 1
 fi
 
 # 检查设置的目录是否存在，不存在直接退出
 if [ -d "$(pwd)${PUBLISH_DIR}" ]; then
-    echo "错误：PUBLISH_DIR 尚未生成"
+    echo "【致命错误】：PUBLISH_DIR 尚未生成"
     exit 1
 fi
+
+# 检查要发布的分支名称
+if [ -z "${PUBLISH_BRANCH}"]; then
+    print_error "【致命错误】：没有发现 PUBLISH_BRANCH"
+    exit 1
+fi
+
 
 # 进入到build的目录
 cd "${PUBLISH_DIR}"
@@ -37,29 +44,25 @@ fi
 # 配置ssh
 if [ -n "${DEPLOY_ACCESS_TOKEN}"]; then
     echo "设置 DEPLOY_ACCESS_TOKEN"
-    SSH_DIR="${HOME}.ssh"
-    # SSH_DIR = "/root/.ssh"
+    # SSH_DIR="${HOME}.ssh"
+    SSH_DIR = "/root/.ssh"
     mkdir "${SSH_DIR}"
     ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
     echo "${DEPLOY_ACCESS_TOKEN}" >"${SSH_DIR}/id_rsa"
     chmod 400 "${SSH_DIR}/id_rsa"
     remote_repo="git@github.com:${PUBLISH_REPOSITORY}.git"
 fi
-# 检查要发布的脚本
-if [ -z "${PUBLISH_BRANCH}"]; then
-    print_error "致命错误：没有发现 PUBLISH_BRANCH"
-    exit 1
-fi
+
 # 跳过配置personal_token 和 github_token
 remote_branch="${PUBLISH_BRANCH}"
 
 # 配置git
 git init
-git checkout --orphan "${remote_branch}"
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote rm origin || true
 git remote add origin "${remote_repo}"
+git checkout --orphan "${remote_branch}"
 
 # git提交
 git add .
@@ -67,7 +70,7 @@ git commit -m "[Deploy sucess]：$(date)"
 
 # 查看branch
 
-git branch -v 
+git branch -v
 git remote -v
 
 # 抛出错误
