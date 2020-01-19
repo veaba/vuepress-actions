@@ -1,5 +1,5 @@
 # !/bin/bash
-检查Actions目录配置
+# 检查Actions目录配置
 if [ -z "${PUBLISH_DIR}" ]; then
     echo "错误：workflows尚未设置 PUBLISH_DIR"
     exit 1
