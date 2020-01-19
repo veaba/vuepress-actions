@@ -2,10 +2,15 @@
 echo $(pwd)
 echo $(ls)
 
+cd docs
 
-cd "${PUBLISH_DIR}"
+echo $(pwd)
+echo $(ls)
 
-if [ -z "${PUBLISH_DIR}"]; then 
+
+# cd "${PUBLISH_DIR}"
+
+if [ -z "${PUBLISH_DIR}" ]; then
     echo "未发现所要发布的目录"
     exit 1
 fi
