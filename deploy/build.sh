@@ -17,7 +17,7 @@ cd "${PUBLISH_DIR}"
 
 # 为gh-pages 生成CNAME，发现使用别人提供的脚本，生成的竟然是小写的CNAME文件，所以改为小写的，使用脚本写入
 
-echo "vue.datav.ai"> CNAME
+echo "vue.datav.ai" >CNAME
 
 function print_error() {
     echo -e "\e[31mERROR: ${1}\e[m"
@@ -61,10 +61,9 @@ git remote rm origin || true
 git add .
 git commit -m "[Deploy sucess]：$(date)"
 
-
 # 抛出错误
 set -e
 
-echo $(git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress-actions.git master:gh-pages)
+echo $(git push -f https://veaba:${ACCESS_TOKEN_PUSH}@github.com/veaba/vuepress-actions.git ${PUBLISH_BRANCH})
 
 echo "漂亮！部署成功： $(date)"
