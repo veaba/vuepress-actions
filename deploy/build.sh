@@ -65,12 +65,12 @@ git remote rm origin || true
 git remote add origin "${remote_repo}"
 
 # git提交
-git add -all
+git add .
 git commit -m "[Deploy sucess]：$(date)"
 
 # 抛出错误
 set -e
 
-git push origin "${PUBLISH_BRANCH}"
+git push origin -f "${PUBLISH_BRANCH}"
 
 print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"

@@ -24,7 +24,7 @@ jobs:
         env:
           CI: true
 
-      - name: 步骤：第二步 -> 使用脚本部署todo
+      - name: 步骤：第三步 -> 使用脚本部署
         env:
           ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
           PUBLISH_BRANCH: gh-pages
