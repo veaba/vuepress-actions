@@ -44,8 +44,8 @@ fi
 # 配置ssh
 if [ -n "${ACCESS_TOKEN_DEPLOY}" ]; then
     echo "设置 ACCESS_TOKEN_DEPLOY"
-    # SSH_DIR="${HOME}.ssh"
-    SSH_DIR="/root/.ssh"
+    SSH_DIR="${HOME}/.ssh"
+    # SSH_DIR="/root/.ssh"
     mkdir "${SSH_DIR}"
     ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
     echo "${ACCESS_TOKEN_DEPLOY}" >"${SSH_DIR}/id_rsa"
@@ -65,7 +65,6 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
 git remote rm origin || true
 git remote add origin "${remote_repo}"
-
 
 # git提交
 git add .
