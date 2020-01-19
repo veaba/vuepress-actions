@@ -7,13 +7,21 @@ cd docs
 echo $(pwd)
 echo $(ls)
 
-
 # cd "${PUBLISH_DIR}"
 
+# 检查Actions目录配置
 if [ -z "${PUBLISH_DIR}" ]; then
-    echo "未发现所要发布的目录"
+    echo "错误：workflows尚未设置 PUBLISH_DIR"
     exit 1
 fi
+
+# 检查设置的目录是否存在，不存在直接退出
+if [ -d "${PUBLISH_DIR}" ]; then
+    echo "错误：PUBLISH_DIR 尚未生成"
+    exit 1
+fi
+
+cd "${PUBLISH_DIR}"
 
 echo $(pwd)
 echo $(ls)
