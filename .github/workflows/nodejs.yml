@@ -17,17 +17,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: 步骤：第二步 -> 安装依赖
-        run: |
-          npm install
-          npm run build
-        env:
-          CI: true
+      # - name: 步骤：第二步 -> 安装依赖
+      #   run: |
+      #     npm install
+      #     npm run build
+      #   env:
+      #     CI: true
 
-      - name: 步骤：第三步 -> 使用脚本部署
+      - name: 步骤：第二步 -> 使用脚本部署todo
         env:
           ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
         run: |
+          chmod +x  deploy/build.sh
           bash deploy/build.sh

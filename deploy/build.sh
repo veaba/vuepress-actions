@@ -7,8 +7,7 @@ cd ./docs
 echo $(pwd)
 echo $(ls)
 
-find / -name .vuepress
-
+mkdir xx
 # ！！！为什么这里没有呢？
 echo $(pwd)
 echo $(ls)
