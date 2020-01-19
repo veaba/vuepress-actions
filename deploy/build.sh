@@ -12,9 +12,11 @@
 #     exit 1
 # fi
 
-# cd "${PUBLISH_DIR}"
+echo $(pwd)
+echo $(ls)
 
-find / -name "${PUBLISH_DIR}"
+
+cd "${PUBLISH_DIR}"
 
 echo $(pwd)
 echo $(ls)
