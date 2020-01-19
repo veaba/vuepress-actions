@@ -45,10 +45,10 @@ fi
 if [ -n "${DEPLOY_ACCESS_TOKEN}"]; then
     echo "设置 DEPLOY_ACCESS_TOKEN"
     # SSH_DIR="${HOME}.ssh"
-    SSH_DIR = "/root/.ssh"
+    SSH_DIR="/root/.ssh"
     mkdir "${SSH_DIR}"
-    ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
-    echo "${DEPLOY_ACCESS_TOKEN}" >"${SSH_DIR}/id_rsa"
+    ssh-keyscan -t rsa github.com > "${SSH_DIR}/known_hosts"
+    echo "${DEPLOY_ACCESS_TOKEN}" > "${SSH_DIR}/id_rsa"
     chmod 400 "${SSH_DIR}/id_rsa"
     remote_repo="git@github.com:${PUBLISH_REPOSITORY}.git"
 fi
@@ -58,20 +58,23 @@ remote_branch="${PUBLISH_BRANCH}"
 
 # 配置git
 git init
+git checkout --orphan "${remote_branch}" #积分无数次commit，不算分支
+
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
 git remote rm origin || true
 git remote add origin "${remote_repo}"
-git checkout --orphan "${remote_branch}"
+
+
 
 # git提交
 git add .
 git commit -m "[Deploy sucess]：$(date)"
 
 # 查看branch
-
-git branch -v
-git remote -v
+echo "查看分支：$(git branch -v)"
+echo "查看remote：$(git remote -v)"
 
 # 抛出错误
 set -e
