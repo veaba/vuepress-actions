@@ -7,6 +7,9 @@ cd ./docs
 echo $(pwd)
 echo $(ls)
 
+cd ./vuepress
+echo $(pwd)
+echo $(ls)
 
 # 检查Actions目录配置
 # if [ -z "${PUBLISH_DIR}" ]; then
