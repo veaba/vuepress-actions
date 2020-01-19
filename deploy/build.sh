@@ -59,6 +59,8 @@ fi
 remote_branch="${PUBLISH_BRANCH}"
 
 # 配置git
+git init
+git checkout --orphan "${remote_branch}"
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote rm origin || true
@@ -68,9 +70,13 @@ git remote add origin "${remote_repo}"
 git add .
 git commit -m "[Deploy sucess]：$(date)"
 
+# 查看branch
+
+git branch -v 
+git remote -v
+
 # 抛出错误
 set -e
-
 git push origin -f "${PUBLISH_BRANCH}"
 
 print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"
