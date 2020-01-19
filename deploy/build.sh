@@ -2,11 +2,6 @@
 echo $(pwd)
 echo $(ls)
 
-cd docs
-
-echo $(pwd)
-echo $(ls)
-
 # cd "${PUBLISH_DIR}"
 
 # 检查Actions目录配置
