@@ -7,7 +7,7 @@ if [ -z "${PUBLISH_DIR}" ]; then
 fi
 
 # 检查设置的目录是否存在，不存在直接退出
-if [ -d "${PUBLISH_DIR}" ]; then
+if [ -d "$(pwd)${PUBLISH_DIR}" ]; then
     echo "错误：PUBLISH_DIR 尚未生成"
     exit 1
 fi
