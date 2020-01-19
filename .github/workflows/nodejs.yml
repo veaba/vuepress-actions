@@ -29,6 +29,7 @@ jobs:
           ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
+          CNAME: vuepress.datav.ai
         run: |
           chmod +x deploy/build.sh
           bash deploy/build.sh
