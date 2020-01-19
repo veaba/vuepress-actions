@@ -3,6 +3,16 @@ echo $(pwd)
 echo $(ls)
 
 
+cd "${PUBLISH_DIR}"
+
+if [ -z "${PUBLISH_DIR}"]; then 
+    echo "未发现所要发布的目录"
+    exit 1
+fi
+
+echo $(pwd)
+echo $(ls)
+
 # function print_error() {
 #     echo -e "\e[31mERROR: ${1}\e[m"
 # }
