@@ -24,10 +24,8 @@ cd "${PUBLISH_DIR}" # ./docs/.vuepress/dist
 # 为gh-pages 生成CNAME，发现使用别人提供的脚本，生成的竟然是小写的CNAME文件，所以改为小写的，使用脚本写入
 
 # 设置CNAME
-if [ -z "${CNAME}" ]; then 
+if [ -n "${CNAME}" ]; then 
     cname ="${CNAME}"
-    echo "${cname}"
-    echo "${cname}"
     echo "${cname}">CNAME
 fi 
 
