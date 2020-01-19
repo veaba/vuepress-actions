@@ -71,14 +71,9 @@ git remote add origin "${remote_repo}"
 
 # git提交
 git add .
-git commit -m "[Deploy sucess]：$(date)"
-
-# 查看branch
-echo "查看分支：\ $(git branch -v)"
-echo "查看remote：\ $(git remote -v)"
-echo "查看仓库地址：\ ${remote_repo}"
-echo "查看PUBLISH_REPOSITORY：\ ${PUBLISH_REPOSITORY}"
+push_time="$(date '+%Y-%m-%d %H:%M:%S')"
+git commit -m "【Deploy Sucessfull!】：${push_time}"
 
 git push origin -f "${PUBLISH_BRANCH}"
 
-print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"
+print_info "${GITHUB_SHA} 漂亮！部署成功： ${push_time}"
