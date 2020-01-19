@@ -16,20 +16,25 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: 步骤：第二步，安装依赖
-        run: |
-          npm install
-          npm run build --if-present
-        env:
-          CI: true
-      # - name: 步骤：第三步（deplpy：deploy/build.sh）
-      #   env:
-      #     ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS__CI }}
+
+
+      # - name: 步骤：第二步，安装依赖
       #   run: |
-      #     sh deploy/build.sh
-      - name: 步骤：第三步：Deploy,部署
-        uses: peaceiris/actions-gh-pages@v2.5.0
+      #     npm install
+      #     npm run build --if-present
+      #   env:
+      #     CI: true
+      - name: 步骤：第三步（deplpy：deploy/build.sh）
         env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
+          ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
+        run: |
+          bash deploy/build.sh
+          
+      # - name: 步骤：第三步：Deploy,部署
+      #   uses: peaceiris/actions-gh-pages@v2.5.0
+      #   env:
+      #     ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
+      #     PUBLISH_BRANCH: gh-pages
+      #     PUBLISH_DIR: ./docs/.vuepress/dist
