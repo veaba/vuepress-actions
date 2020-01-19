@@ -25,7 +25,10 @@ cd "${PUBLISH_DIR}" # ./docs/.vuepress/dist
 
 # 设置CNAME
 if [ -z "${CNAME}" ]; then 
-    echo "${CNAME}">CNAME
+    cname ="${CNAME}"
+    echo "${cname}"
+    echo "${cname}"
+    echo "${cname}">CNAME
 fi 
 
 # 格式化的输出
