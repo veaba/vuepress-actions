@@ -1,8 +1,14 @@
 # vuepress
 
-Vuepress生成文件时候，会被public里面的文件改写为小写，而如果自定义域名的话是一个叫`CNAME`的文件，会被小写覆盖，导致每次都要在设置里面重新设置一遍自定义域名，所以这里使用了自己的脚本来发布Vuepress项目，以更灵活的定制
+一个简单的 vuepres 项目部署工具，[Marketplace Actions Release Vuepress docs](https://github.com/marketplace/actions/release-vuepress-docs)
 
-## 生成ssh添加deploy token
+```yaml
+- name: Release Vuepress docs
+  uses: veaba/vuepress-actions@v0.83
+```
+
+## Usage
+### Generate deploy token
 
 ```shell
  ssh-keygen -t rsa -b 4096 -C "your@email.com" -f gh-pages -N ""
@@ -10,18 +16,29 @@ Vuepress生成文件时候，会被public里面的文件改写为小写，而如
  # gh-pages 私钥
 ```
 
-Deploy key 添加公钥
+### Setting ssh key 
 
-Secrets 添加私钥
+**Deploy key 添加公钥**：
 
+在你的 `Repo` 中，找到 `setting`，在左侧 `Deploy keys` ，起个名字，将 `gh-pages.pub` 复制进去。
 
+**Secrets 添加私钥**：
 
-## 关于本项目使用的Actions
+在你的 `Repo` 中，找到 `setting`，在左侧 `Secrets`，起个名字，如 `ACCESS_TOKEN`，将 `gh-pages.pub` 复制进去。
+
+**记住这个名字：`ACCESS_TOKEN`**，务必与 `env.ACCESS_TOKEN_DEPLOY` 保持一致，见后面给出的范例
+
+### Add Github Action
+
+[范例](https://github.com/veaba/deno-docs/blob/master/.github/workflows/release.yml)：
 
 ```yml
-name: Vuepress CI
+name: release docs CI
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -47,98 +64,31 @@ jobs:
 
       - name: 步骤：第三步 -> 使用脚本部署
         env:
-          ACCESS_TOKEN_DEPLOY: ${{secrets.ACTIONS_ACCESS_TOKEN_VUEPRESS_CI }}
+          ACCESS_TOKEN_DEPLOY: ${{secrets.ACCESS_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
-        run: |
-          chmod +x deploy/build.sh
-          bash deploy/build.sh
-
+          CNAME: deno.datav.ai
+        uses: veaba/vuepress-actions@v0.83 
 ```
 
-## 脚本如下
+注意，为了确保获得功能正常，请始终使用最新版：
 
-```shell
-# !/bin/bash
-set -e
-# 检查Actions目录配置
-if [ -z "${PUBLISH_DIR}" ]; then
-    echo "【致命错误】：workflows尚未设置 PUBLISH_DIR"
-    exit 1
-fi
+- `veaba/vuepress-actions@v0.83` 这是一个预生产版本，它已经可以工作了，[参考 deno-docs](https://github.com/veaba/deno-docs/actions/runs/406004283)。
 
-# 检查设置的目录是否存在，不存在直接退出
-if [ -d "$(pwd)${PUBLISH_DIR}" ]; then
-    echo "【致命错误】：PUBLISH_DIR 尚未生成"
-    exit 1
-fi
+- `CNAME` 部分是用户自己配置的域名。
 
-# 检查要发布的分支名称
-if [ -z "${PUBLISH_BRANCH}" ]; then
-    print_error "【致命错误】：没有发现 PUBLISH_BRANCH"
-    exit 1
-fi
+- 如果一切成功，将会在 Actions 中看到执行结果
 
-# 进入到build的目录
-cd "${PUBLISH_DIR}" # ./docs/.vuepress/dist
+- 同时，会在生成一个 `gh-pages` 分支
 
-# 为gh-pages 生成CNAME，发现使用别人提供的脚本，生成的竟然是小写的CNAME文件，所以改为小写的，使用脚本写入
+- 这个脚本是与 `vuepress`项目绑定的，请务必是一个正常的 `vuepress` 项目
 
-echo "vue.datav.ai" >CNAME
 
-# 格式化的输出
-function print_error() {
-    echo -e "\e[31mERROR: ${1}\e[m"
-}
+## Options
 
-function print_info() {
-    echo -e "\e[36mINFO: ${1}\e[m"
-}
+- PUBLISH_BRANCH
+- PUBLISH_DIR
+- CNAME
 
-# 配置仓库地址
-if [ -n "${EXTERNAL_REPOSITORY}" ]; then
-    PUBLISH_REPOSITORY=${EXTERNAL_REPOSITORY}
-else
-    PUBLISH_REPOSITORY=${GITHUB_REPOSITORY}
-fi
+用户见前述
 
-# 配置ssh
-if [ -n "${ACCESS_TOKEN_DEPLOY}" ]; then
-    echo "设置 ACCESS_TOKEN_DEPLOY"
-    SSH_DIR="${HOME}/.ssh"
-    # SSH_DIR="/root/.ssh"
-    mkdir "${SSH_DIR}"
-    ssh-keyscan -t rsa github.com >"${SSH_DIR}/known_hosts"
-    echo "${ACCESS_TOKEN_DEPLOY}" >"${SSH_DIR}/id_rsa"
-    chmod 400 "${SSH_DIR}/id_rsa"
-    remote_repo="git@github.com:${PUBLISH_REPOSITORY}.git"
-fi
-
-# 跳过配置personal_token 和 github_token
-remote_branch="${PUBLISH_BRANCH}"
-
-# 配置git
-git init
-git checkout --orphan "${remote_branch}" # 积累无数次commit，不算分支
-
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-git remote rm origin || true
-git remote add origin "${remote_repo}"
-
-# git提交
-git add .
-git commit -m "[Deploy sucess]：$(date)"
-
-# 查看branch
-echo "查看分支：\ $(git branch -v)"
-echo "查看remote：\ $(git remote -v)"
-echo "查看仓库地址：\ ${remote_repo}"
-echo "查看PUBLISH_REPOSITORY：\ ${PUBLISH_REPOSITORY}"
-
-git push origin -f "${PUBLISH_BRANCH}"
-
-print_info "${GITHUB_SHA} 漂亮！部署成功： $(date)"
-
-```
