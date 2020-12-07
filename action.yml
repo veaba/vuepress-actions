@@ -1,1 +1,3 @@
-
+name: "Release Vuepress docs"
+description: "Simple release your vuepress docs!"
+author: "Veaba"
