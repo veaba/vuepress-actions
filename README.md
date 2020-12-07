@@ -1,5 +1,7 @@
 # vuepress
 
+![Vuepress CI](https://github.com/veaba/vuepress-actions/workflows/Vuepress%20CI/badge.svg)
+
 一个简单的 vuepres 项目部署工具，[Marketplace Actions Release Vuepress docs](https://github.com/marketplace/actions/release-vuepress-docs)
 
 ```yaml
