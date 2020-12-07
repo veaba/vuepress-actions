@@ -1,3 +1,11 @@
 name: "Release Vuepress docs"
 description: "Simple release your vuepress docs!"
 author: "Veaba"
+runs: 
+  using: "composite"
+  steps: 
+    - run: $/deploy/build.sh
+      shell: bash
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
