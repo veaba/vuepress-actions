@@ -4,7 +4,9 @@ author: "Veaba"
 runs:
   using: "composite"
   steps:
-    - run: $GITHUB_ACTION_PATH/deploy/build.sh
+    - run: |
+        chmod +x $GITHUB_ACTION_PATH/deploy/build.sh
+        bash $GITHUB_ACTION_PATH/deploy/build.sh
       shell: bash
 branding:
   icon: "tag"
