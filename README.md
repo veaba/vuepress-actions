@@ -26,7 +26,7 @@
 
 **Secrets 添加私钥**：
 
-在你的 `Repo` 中，找到 `setting`，在左侧 `Secrets`，起个名字，如 `ACCESS_TOKEN`，将 `gh-pages.pub` 复制进去。
+在你的 `Repo` 中，找到 `setting`，在左侧 `Secrets`，起个名字，如 `ACCESS_TOKEN`，将 `gh-pages` 复制进去。
 
 **记住这个名字：`ACCESS_TOKEN`**，务必与 `env.ACCESS_TOKEN_DEPLOY` 保持一致，见后面给出的范例
 
