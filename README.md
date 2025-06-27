@@ -13,7 +13,7 @@
 ### Generate deploy token
 
 ```shell
- ssh-keygen -t rsa -b 4096 -C "your@email.com" -f gh-pages -N ""
+ ssh-keygen -t rsa -b 4096 -C "your@email.com" -f gh-pages -N '""'
  # gh-pages.pub 公钥
  # gh-pages 私钥
 ```
